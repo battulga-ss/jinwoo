@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+generator client {
+  provider      = "prisma-client"
+  output        = "../generated/prisma"
+  binaryTargets = ["native", "windows", "darwin-arm64"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum QuestStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum QuestType {
+  DAILY
+  NORMAL
+}
+
+type Stats {
+  str Int
+  agi Int
+  int Int
+  phy Int
+}
+
+type Reward {
+  xp  Int
+  str Int
+  agi Int
+  int Int
+  phy Int
+}
+
+model User {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  avatar    String?
+  level     Int?    @default(1)
+  xp        Int?    @default(1)
+  stats     Stats?
+  role      Role?   @default(USER)
+  isPremium Boolean @default(false)
+  isActive  Boolean @default(true)
+  premiumExpiresAt DateTime?
+  password  String
+  email     String  @unique
+  quests    Quest[]
+}
+
+model Quest {
+  id     String      @id @default(auto()) @map("_id") @db.ObjectId
+  title  String
+  status QuestStatus @default(PENDING)
+  type   QuestType
+  reward Reward
+
+  userId      String    @db.ObjectId
+  user        User      @relation(fields: [userId], references: [id])
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+}

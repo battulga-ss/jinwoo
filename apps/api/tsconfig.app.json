@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ES2023",
+    "strict": true,
+    "esModuleInterop": true,
+    "ignoreDeprecations": "5.0",
+    "outDir": "dist",
+    "types": ["node", "express"],
+    "rootDir": ".",
+    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts", "generated/**/*.ts"],
+  "exclude": []
+}

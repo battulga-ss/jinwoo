@@ -1,0 +1,79 @@
+{
+  "name": "@org/api",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "targets": {
+      "prune-lockfile": {
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "executor": "@nx/js:prune-lockfile",
+        "outputs": [
+          "{workspaceRoot}/apps/api/dist/package.json",
+          "{workspaceRoot}/apps/api/dist/package-lock.json"
+        ],
+        "options": {
+          "buildTarget": "build"
+        }
+      },
+      "copy-workspace-modules": {
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "outputs": [
+          "{workspaceRoot}/apps/api/dist/workspace_modules"
+        ],
+        "executor": "@nx/js:copy-workspace-modules",
+        "options": {
+          "buildTarget": "build"
+        }
+      },
+      "prune": {
+        "dependsOn": [
+          "prune-lockfile",
+          "copy-workspace-modules"
+        ],
+        "executor": "nx:noop"
+      },
+      "serve": {
+        "continuous": true,
+        "executor": "@nx/js:node",
+        "defaultConfiguration": "development",
+        "dependsOn": [
+          "build"
+        ],
+        "options": {
+          "buildTarget": "@org/api:build",
+          "runBuildTargetDependencies": false
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "@org/api:build:development"
+          },
+          "production": {
+            "buildTarget": "@org/api:build:production"
+          }
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@apollo/server": "^5.5.0",
+    "@as-integrations/express4": "^1.1.2",
+    "@prisma/client": "6.19",
+    "@supabase/supabase-js": "^2.103.3",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.3.1",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.5.0",
+    "prisma": "6.19"
+  }
+}
