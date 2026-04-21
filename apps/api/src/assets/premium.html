@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #0f0f0f;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 40px auto;
+        background: #1a1a2e;
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .banner {
+        background: linear-gradient(135deg, #d97706, #f59e0b);
+        padding: 40px;
+        text-align: center;
+      }
+      .banner h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+      .content {
+        padding: 32px;
+      }
+      .content p {
+        color: #9ca3af;
+        line-height: 1.6;
+      }
+      .badge {
+        display: inline-block;
+        background: rgba(245, 158, 11, 0.2);
+        color: #fbbf24;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        padding: 4px 12px;
+        border-radius: 99px;
+        font-size: 13px;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        color: #4b5563;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="banner">
+        <div style="font-size: 48px">⭐</div>
+        <h1>Premium Activated!</h1>
+      </div>
+      <div class="content">
+        <p>
+          Hi <strong>{{name}}</strong>, your Premium subscription has been
+          activated!
+        </p>
+        <p>
+          <span class="badge">⭐ Premium</span> — Valid for
+          <strong>30 days</strong> until <strong>{{expiresAt}}</strong>.
+        </p>
+        <p>
+          You can now create and complete quests to earn rewards and level up!
+        </p>
+      </div>
+      <div class="footer">© 2026 Jinwoo App</div>
+    </div>
+  </body>
+</html>
